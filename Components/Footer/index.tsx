@@ -1,5 +1,7 @@
 import * as S from './styles';
-import playStore from '../../assets/images/google-play.png';
+import playStore from '../../images/google-play.png';
+import Image from 'next/image';
+
 export default function Footer() {
     return (
       <S.Container>
@@ -15,7 +17,7 @@ export default function Footer() {
 
             </div>
             <div className="containerIcons">
-              <img src={playStore} alt="Play Store" />
+              <Image src={playStore} alt="Play Store" />
               <span>Google Play</span>
             </div>
           </div>

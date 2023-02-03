@@ -6,6 +6,10 @@ import MainCategories from '@/Components/SectionMainCategory'
 import NewProducts from '@/Components/SectionNewProducts'
 import BigPromation from '@/Components/SectionBigPromation'
 import Accessory from '@/Components/SectionAccessory'
+import Announcements from '@/Components/SectionAnnoucument'
+import FeaturedServices from '@/Components/FeaturedServices'
+import NewsLetter from '@/Components/NewsLestter'
+import Footer from '@/Components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +22,10 @@ export default function Home() {
       <NewProducts />
       <BigPromation />
       <Accessory />
+      <Announcements />
+      <FeaturedServices />
+      <NewsLetter />
+      <Footer />
     </Fragment>
       
   )
