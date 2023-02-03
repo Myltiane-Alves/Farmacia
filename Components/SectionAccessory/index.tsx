@@ -1,8 +1,8 @@
 import { AiOutlineHeart, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
 import * as S from './styles'
-import celular from '../../assets/images/flash/flash-3.png'
-
+import celular from '../../assets/flash/flash-3.png'
 import SiderBarBrand from '../SiderBarBrand'
+import Image from 'next/image'
 
 export default function Accessory() {
     return (
@@ -16,7 +16,7 @@ export default function Accessory() {
                     <div className="product">
                         <div className="content">
                             <span> 40% off</span>
-                            <img src={celular} alt="celular" />
+                            <Image src={celular} alt="celular" />
                             <div className="productLike">
                                 <label htmlFor="">1</label> <br />
                                 <AiOutlineHeart className='heart' />
@@ -43,9 +43,9 @@ export default function Accessory() {
                     </div>
                     <div className="product">
                         <div className="content">
-                            <img src="" alt="" />
+                            <Image src="" alt="" />
                             <span> 40% off</span>
-                            <img src={celular} alt="celular" />
+                            <Image src={celular} alt="celular" />
                             <div className="productLike">
                                 <label htmlFor="">1</label> <br />
                                 <AiOutlineHeart className='heart' />
@@ -72,9 +72,9 @@ export default function Accessory() {
                     </div>
                     <div className="product">
                         <div className="content">
-                            <img src="" alt="" />
+                            <Image src="" alt="" />
                             <span> 40% off</span>
-                            <img src={celular} alt="celular" />
+                            <Image src={celular} alt="celular" />
                             <div className="productLike">
                                 <label htmlFor="">1</label> <br />
                                 <AiOutlineHeart className='heart' />
@@ -101,9 +101,9 @@ export default function Accessory() {
                     </div>
                     <div className="product">
                         <div className="content">
-                            <img src="" alt="" />
+                            <Image src="" alt="" />
                             <span> 40% off</span>
-                            <img src={celular} alt="celular" />
+                            <Image src={celular} alt="celular" />
                             <div className="productLike">
                                 <label htmlFor="">1</label> <br />
                                 <AiOutlineHeart className='heart' />

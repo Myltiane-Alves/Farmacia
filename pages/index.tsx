@@ -5,6 +5,7 @@ import HeaderSlide from '@/Components/Sliders/HeadSlider'
 import MainCategories from '@/Components/SectionMainCategory'
 import NewProducts from '@/Components/SectionNewProducts'
 import BigPromation from '@/Components/SectionBigPromation'
+import Accessory from '@/Components/SectionAccessory'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,7 @@ export default function Home() {
       <MainCategories />
       <NewProducts />
       <BigPromation />
+      <Accessory />
     </Fragment>
       
   )
