@@ -4,11 +4,11 @@ import * as S from "./styles";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import sliderelogio from "../../../assets/images/SlideCard/slide-relogio.png";
-import slidetenis from "../../../assets/images/SlideCard/slide-tenis.png";
-import slide2 from "../../../assets/images/SlideCard/slide-2.png";
+import sliderelogio from "../../../images/SlideCard/slide-relogio.png";
+import slidetenis from "../../../images/SlideCard/slide-tenis.png";
+import slide2 from "../../../images/SlideCard/slide-2.png";
 
-
+import Image from "next/image";
 
 import { Autoplay, Navigation, Pagination } from "swiper";
 export default function HeaderSlide() {
@@ -35,7 +35,7 @@ export default function HeaderSlide() {
                             <button className="colection" type="button"> <a> Visitar Coleções </a></button>
                         </div>
                         <div className="slideRight">
-                            <img src={slidetenis} alt="médico com uma criança" width="100%" className="tenis"/>
+                            <Image src={slidetenis} alt="médico com uma criança"  className="tenis"/>
                         </div>
 
                     </div>
@@ -50,7 +50,7 @@ export default function HeaderSlide() {
                             <button className="colection" type="button"> <a> Visitar Coleções </a></button>
                         </div>
                         <div className="slideRight">
-                            <img src={sliderelogio} alt="médico com uma criança" className="relogio" />
+                            <Image src={sliderelogio} alt="médico com uma criança" className="relogio" />
                         </div>
 
                     </div>

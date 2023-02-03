@@ -1,6 +1,7 @@
 import { AiOutlineCaretRight } from 'react-icons/ai'
 import * as S from './styles'
-import oculos from '../../assets/images/top/category-3.png'
+import oculos from '../../images/top/category-3.png'
+import Image from 'next/image'
 
 export default function MainCategories() {
   return (
@@ -20,7 +21,7 @@ export default function MainCategories() {
               <span className="textLeft">Sunglass</span>
               <span className="textRight">R$ 150,00 </span>
               <div className="containerImg">
-                <img src={oculos} alt="oculos" />
+                <Image src={oculos} alt="oculos" />
               </div>
             </div>
           </div>
@@ -29,7 +30,7 @@ export default function MainCategories() {
               <span className="textLeft">Sunglass</span>
               <span className="textRight">R$ 150,00 </span>
               <div className="containerImg">
-                <img src={oculos} alt="oculos" />
+                <Image src={oculos} alt="oculos" />
               </div>
             </div>
           </div>
@@ -38,7 +39,7 @@ export default function MainCategories() {
               <span className="textLeft">Sunglass</span>
               <span className="textRight">R$ 150,00 </span>
               <div className="containerImg">
-                <img src={oculos} alt="oculos" />
+                <Image src={oculos} alt="oculos" />
               </div>
             </div>
           </div>
