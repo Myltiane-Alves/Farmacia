@@ -6,22 +6,6 @@ export default function Footer() {
     return (
       <S.Container>
         <div className="content">
-
-          <div className="box-1">
-            <h2>Shop Mil</h2>
-            <div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et,
-                in gravida. Sit diam duis mauris nulla cursus.
-                Erat et lectus vel ut sollicitudin elit at amet.
-              </p>
-
-            </div>
-            <div className="containerIcons">
-              <Image src={playStore} alt="Play Store" />
-              <span>Google Play</span>
-            </div>
-          </div>
-
           <div className="boxLink">
             <h4>Links</h4>
             <ul>

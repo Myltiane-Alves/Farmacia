@@ -27,8 +27,8 @@ export const Container = styled.section`
       margin: 10px;
       .imgIcon {
         margin: auto;
-        width: 70px;
-        height: 70px;
+        width: 50%;
+        height: auto;
         line-height: 70px;
         margin-bottom: 20px;
         img {

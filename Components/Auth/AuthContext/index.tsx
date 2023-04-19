@@ -1,16 +1,16 @@
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import React, { useState, createContext, useContext, useCallback, useEffect } from 'react';
-import { AuthContextType } from '../../../types/Auth/AuthContextType';
-import { AuthProviderProps } from '../../../types/Auth/AuthProviderProps';
-import { CurrentFormType } from '../../../types/Auth/CurrentFormType';
-import { FormDataLogin } from '../../../types/Auth/FormDataLogin';
-import { FormEmailResponse } from '../../../types/Auth/FormEmailResponse';
-import { FormLoginResponse } from '../../../types/Auth/FormLoginResponse';
-import { User } from '../../../types/User';
-import { AuthenticationResponse } from '../../../types/Auth/AuthenticationResponse';
-import { FormDataPasswordReset } from '../../../types/Auth/FormDataPasswordReset';
-import { FormDataRegister } from '../../../types/Auth/FormDataRegister';
+import axios from "axios";
+import { useRouter } from "next/router";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { AuthContextType } from "../../../types/Auth/AuthContextType";
+import { AuthenticationResponse } from "../../../types/Auth/AuthenticationResponse";
+import { AuthProviderProps } from "../../../types/Auth/AuthProviderProps";
+import { CurrentFormType } from "../../../types/Auth/CurrentFormType";
+import { FormDataLogin } from "../../../types/Auth/FormDataLogin";
+import { FormDataPasswordReset } from "../../../types/Auth/FormDataPasswordReset";
+import { FormDataRegister } from "../../../types/Auth/FormDataRegister";
+import { FormEmailResponse } from "../../../types/Auth/FormEmailResponse";
+import { FormLoginResponse } from "../../../types/Auth/FormLoginResponse";
+import { User } from "../../../types/User";
 
 const AuthContext = createContext<AuthContextType>({
     currentForm: 'email',
@@ -19,32 +19,32 @@ const AuthContext = createContext<AuthContextType>({
     onSubmitEmail: () => { },
     onSubmitLogin: () => { },
     onSubmitRegister: () => { },
-    onSubmitForget: () => { },
     onSubmitPasswordReset: () => { },
+    onSubmitForget: () => { },
     loadingFormForget: false,
     token: null,
     user: null,
     setUser: () => { },
     logout: () => { },
-})
+});
+
 const AuthProvider = ({ children }: AuthProviderProps) => {
 
-    let navigate = useNavigate();
+    const router = useRouter();
     const [currentForm, setCurrentForm] = useState<CurrentFormType>('email');
     const [email, setEmail] = useState('');
     const [loadingFormForget, setLoadingFormForget] = useState(false);
+    const [nextURL, setNextURL] = useState('/profile');
     const [token, setToken] = useState<string | null>(null);
     const [user, setUser] = useState<User | null>(null);
-    const [nextURL, setNextURL] = useState('/profile');
-
 
     const onSubmitEmail = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         axios.post<FormEmailResponse>(`/auth`, {
-            email,
+            email
         }, {
-            baseURL: process.env.VITE_REACT_APP_BASEURL
+            baseURL: process.env.API_URL
         }).then(({ data: { exists } }) => {
 
             if (exists) {
@@ -52,16 +52,17 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             } else {
                 setCurrentForm('register');
             }
-        }).catch(error => console.error(error));
-    }, [email])
 
-    const redirectToNextUrl = useCallback(() => navigate(nextURL), [nextURL, navigate]);
+        }).catch(error => console.error(error));
+    }, [email]);
+
+    const redirectToNextURL = useCallback(() => router.push(nextURL), [nextURL, router]);
 
     const onSubmitLogin = (data: FormDataLogin) => {
 
         axios.post<FormLoginResponse>(`/api/login`, data).then(({ data: { token } }) => {
             setToken(token);
-            redirectToNextUrl();
+            redirectToNextURL();
 
         }).catch(error => console.error(error));
     }
@@ -69,30 +70,37 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const onSubmitRegister = (data: FormDataRegister) => {
 
         axios.post<FormLoginResponse>(`/api/register`, data).then(({ data: { token } }) => {
+
             setToken(token);
-            redirectToNextUrl();
+            redirectToNextURL();
 
         }).catch(error => console.error(error));
     }
 
-    const onSubmitPasswordReset = (data: FormDataPasswordReset) => {
-        data.token = String(navigate) as string;
+    const onSubmitPasswordReset = useCallback((data: FormDataPasswordReset) => {
 
-        axios.post<FormLoginResponse>(`/api/register`, data).then(({ data: { token } }) => {
+        data.token = String(router.query.token) as string;
+
+        axios.post<FormLoginResponse>(`/api/password-reset`, data).then(({ data: { token } }) => {
+
             setToken(token);
-            redirectToNextUrl();
+            redirectToNextURL();
 
         }).catch(error => console.error(error));
-    }
+    }, [router]);
+
     const onSubmitForget = useCallback(() => {
 
-        axios.post<{ success: boolean }>(`/api/register`, { email }, {
-            baseURL: process.env.VITE_REACT_APP_BASEURL
+        setLoadingFormForget(true);
+
+        axios.post<{ success: boolean }>(`/auth/forget`, { email }, {
+            baseURL: process.env.API_URL
         }).then(({ data: { success } }) => {
+
             console.info({ success });
 
         }).catch(error => console.error(error)).finally(() => setLoadingFormForget(false));
-    }, [email])
+    }, [email]);
 
     const getHashForm = useCallback(() => {
         let hash = window.location.hash.replace('#', '') as CurrentFormType;
@@ -102,28 +110,31 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
 
         return hash;
-    }, [email])
+
+    }, [email]);
 
     const handlerCurrentForm = useCallback(() => {
+
         setCurrentForm(getHashForm());
 
-    }, [setCurrentForm, getHashForm])
+    }, [setCurrentForm, getHashForm]);
 
     const logout = () => {
 
         axios.get("/api/logout").then(() => {
             setToken(null);
             setUser(null);
-            navigate("/auth");
+            router.push("/auth");
         });
 
     };
 
     const initAuth = () => {
 
-        axios.get<AuthenticationResponse>('api/session')
-            .then(({ data: { token } }) => setToken(token))
-    }
+        axios.get<AuthenticationResponse>("/api/session")
+        .then(({ data: { token } }) => setToken(token));
+
+    };
 
     useEffect(() => {
 
@@ -158,29 +169,29 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
         window.addEventListener('load', handlerCurrentForm);
         window.addEventListener('hashchange', handlerCurrentForm);
-        navigate(nextURL);
+        router.events.on('hashChangeComplete', handlerCurrentForm);
 
         return () => {
             window.removeEventListener('load', handlerCurrentForm);
             window.removeEventListener('hashchange', handlerCurrentForm);
-            navigate(nextURL);
+            router.events.off('hashChangeComplete', handlerCurrentForm);
         }
 
-    }, [navigate, handlerCurrentForm]);
+    }, [router, handlerCurrentForm]);
 
     useEffect(() => {
 
-        initAuth()
+        initAuth();
 
         setCurrentForm(getHashForm());
 
         const params = new URLSearchParams(window.location.search);
 
-
         if (params.has('next')) {
             setNextURL(String(params.get('next')));
         }
-    }, [])
+
+    }, []);
 
     return <AuthContext.Provider value={{
         currentForm,
@@ -189,8 +200,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         onSubmitEmail,
         onSubmitLogin,
         onSubmitRegister,
-        onSubmitForget,
         onSubmitPasswordReset,
+        onSubmitForget,
         loadingFormForget,
         token,
         user,
@@ -199,15 +210,16 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }}>{children}</AuthContext.Provider>
 }
 
-export default AuthProvider
+export default AuthProvider;
 
 export const useAuth = () => {
 
-    const context = useContext(AuthContext)
+    const context = useContext(AuthContext);
 
     if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider')
+        throw new Error('useAuth must be used within an AuthProvider');
     }
 
     return context;
+
 }

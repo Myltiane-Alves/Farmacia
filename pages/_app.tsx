@@ -4,14 +4,22 @@ import Head from 'next/head';
 
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
-export default function App({ Component, pageProps }: AppProps) {
+import { SessionProvider } from 'next-auth/react';
+export default function App({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   return (
-    <Provider store={store}>
-      <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>ML Farmacia</title>
-      </Head>
-      <Component {...pageProps} />
-    </Provider>
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>ML Farmacia</title>
+        </Head>
+        <Component {...pageProps} />
+      </Provider>
+  
+    </SessionProvider>
   ) 
 }
+
+{/* <ProvidersWrapper>
+{children}
+</ProvidersWrapper> */}

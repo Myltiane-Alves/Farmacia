@@ -113,6 +113,7 @@ export const Container = styled.section`
                    width: 330px;
                    div {
                        display: flex;
+                       flex-direction: column;
                        align-items: center;
                        justify-content: space-between;
                        padding-top: 20px;
@@ -123,9 +124,10 @@ export const Container = styled.section`
                            transition: 0.5s ease-in-out;
                            background-color: #0f3460;
                            /* width: 100%; */
-                           min-width: 150px;
+                           min-width: 224px;
                            height: 50px;
-                           margin: auto;
+                           margin: 0 0 0.75rem;
+                           padding: 0.75rem 1rem;
                            cursor: pointer;
                            color: #fff;
                            font-size: 16px;
@@ -165,6 +167,26 @@ export const Container = styled.section`
                        color: #0f3460;
                    }
 
+               }
+               .containerBtnSocial {
+                    button {
+                        align-items: center;
+                        background-color: #fff;
+                        border-color: rgba(0,0,0,.1);
+                        border-radius: 0.5rem;
+                        box-shadow: 0 0 0 0 #000, 0 0 0 0 #000, 0 10px 15px -3px rgba(0,0,0,.2), 0 4px 6px -4px rgba(0,0,0,.1);
+                        color: #000;
+                        display: flex;
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                        justify-content: center;
+                        margin: 0 0 0.75rem;
+                        min-height: 62px;
+                        padding: 0.75rem 1rem;
+                        position: relative;
+                        transition: all .1s ease-in-out;
+                        cursor: pointer;
+                    }
                }
            }
            p {

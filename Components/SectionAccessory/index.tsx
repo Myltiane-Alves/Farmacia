@@ -1,6 +1,6 @@
 import { AiOutlineHeart, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
 import * as S from './styles'
-import celular from '../../assets/flash/flash-3.png'
+import celular from '../../images/flash/flash-3.png'
 import SiderBarBrand from '../SiderBarBrand'
 import Image from 'next/image'
 

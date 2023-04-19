@@ -22,6 +22,7 @@ export const Nav = styled.div`
     a {
       img {
         width: 80px;
+        height: auto;
       }
     }
   }

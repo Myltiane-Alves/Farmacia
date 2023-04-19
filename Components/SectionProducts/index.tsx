@@ -3,14 +3,14 @@ import ButtonAdd from '../Buttons/ButtonAdd'
 import ButtonRemove from '../Buttons/ButtonMinus'
 import { IoIosClose } from "react-icons/io";
 import ButtonMinus from '../Buttons/ButtonMinus';
-import oculos from '../../assets/images/arrivals/arrivals1.png'
-
+import oculos from '../../images/arrivals/arrivals1.png'
+import Image from 'next/image';
 export default function SectionProducts() {
     return (
         <S.Container>
             <div className="containerCart">
                 <div className="containerImg">
-                    <img src={oculos} alt="oculos" />
+                    <Image src={oculos} alt="oculos" />
                     <div className="description">
                         <p className="">
                             Características Técnicas:

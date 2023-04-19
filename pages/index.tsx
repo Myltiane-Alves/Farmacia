@@ -19,7 +19,7 @@ export default function Home() {
       <Header />
       <HeaderSlide />
       <MainCategories />
-      <NewProducts />
+      {/* <NewProducts /> */}
       <BigPromation />
       <Accessory />
       <Announcements />
@@ -30,3 +30,10 @@ export default function Home() {
       
   )
 }
+ async function getServerSideProps() {
+  return {
+    props: {
+      
+    }
+  }
+ }

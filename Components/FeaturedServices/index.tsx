@@ -1,8 +1,8 @@
 import * as S from './styles';
-import delivery from '../..images/delivery.png';
-import payment from '../..images/credit-card.png';
-import security from '../..images/security.png';
-import support from '../..images/support.png';
+import delivery from '../../images/delivery.png';
+import payment from '../../images/credit-card.png';
+import security from '../../images/security.png';
+import support from '../../images/support.png';
 import Image from 'next/image';
 
 export default function FeaturedServices() {

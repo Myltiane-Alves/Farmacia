@@ -119,6 +119,7 @@ export const Container = styled.section`
                 grid-template-columns: repeat(2, 1fr);
                 .product {
                     width: 70%;
+                    height: auto;
                 }
             }
         }
